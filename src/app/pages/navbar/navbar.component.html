@@ -1,0 +1,28 @@
+<nav class="bg-indigo-700 shadow-lg">
+  <div class="container mx-auto">
+    <div class="sm:flex justify-around">
+      <!-- Title logo -->
+      <a routerLink="home" class="text-white text-3xl font-bold p-3">WebZone</a>
+
+      <!-- Menu Item -->
+
+      <ul class="text-gray-400 sm:self-center text-xl border-t sm:border-none">
+        <li class="sm:inline-block">
+          <a routerLink="/home" class="p-3 hover:text-white">Home</a>
+        </li>
+        <li class="sm:inline-block">
+          <a routerLink="/photos" class="p-3 hover:text-white">Photo Gallery</a>
+        </li>
+        <li class="sm:inline-block">
+          <a routerLink="/register" class="p-3 hover:text-white">Register</a>
+        </li>
+        <li class="sm:inline-block">
+          <a routerLink="/login" class="p-3 hover:text-white">Sign in</a>
+        </li>
+        <li class="sm:inline-block">
+          <a class="p-3 hover:text-white" (click)="onLogOut()">logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

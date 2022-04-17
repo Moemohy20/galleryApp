@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "galleryApp:build:production",
+            "firebaseProject": "galleryapp-5fe9d",
+            "firebaseHostingSite": "galleryapp-5fe9d"
+          }
         }
       }
     }

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "galleryapp-5fe9d": {
+      "hosting": {
+        "galleryApp": [
+          "galleryapp-5fe9d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "galleryapp-5fe9d"
+  }
+}
