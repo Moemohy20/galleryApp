@@ -8,13 +8,16 @@
 
   <div class="grid gap-3 grid-cols-4 p-4">
     <div
-      *ngFor="let photo of galeryphotos"
+      *ngFor="let photo of galeryPhotos"
       class="img-card max-w-sm overflow-hidden shadow-lg rounded"
     >
-      <img src="assets/test.jpg" class="w-full" alt="" />
+      <img [src]="photo.photoUrl" class="w-full" alt="" />
       <div class="px-6 py-4">
-        <div class="font-bold text-purple-500 text-xl mb-2">photo Title</div>
-        <button class="btn">Delete</button>
+        <div class="font-bold text-purple-500 text-xl mb-2">
+          {{ photo.title }}
+        </div>
+        <div class="date font-semibold">{{ photo.date }}</div>
+        <button class="btn my-2">Delete</button>
       </div>
     </div>
   </div>

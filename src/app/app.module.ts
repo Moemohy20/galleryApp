@@ -15,17 +15,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-
 import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { AddPhotoDialogComponent } from './pages/add-photo-dialog/add-photo-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// all FireBase import
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth, getAuth } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AddPhotoDialogComponent } from './pages/add-photo-dialog/add-photo-dialog.component';
-
+// import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+// Froala Editor
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,9 +54,9 @@ import { AddPhotoDialogComponent } from './pages/add-photo-dialog/add-photo-dial
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // provideAuth(() => getAuth()),
-    // provideFirestore(() => getFirestore()),
-    // provideStorage(() => getStorage()),
+    AngularFireStorageModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

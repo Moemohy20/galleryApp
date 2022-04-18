@@ -1,0 +1,22 @@
+<div class="forla-editor">
+  <div class="container mx-auto my-2">
+    <div [(froalaModel)]="editorContent" [froalaEditor]="options">
+      {{ savedHtml }}
+    </div>
+    <button
+      (click)="saveFroalaContent()"
+      class="rounded-full bg-slate-800 w-1/6 text-white text-lg ml-4 py-2 px-3 my-3 uppercase tracking-wider"
+    >
+      Save
+    </button>
+    <button
+      (click)="getFroalaContent()"
+      class="rounded-full bg-slate-800 w-1/6 text-white text-lg ml-4 py-2 px-3 my-3 uppercase tracking-wider"
+    >
+      get data
+    </button>
+    <div class="edited-froala">
+      {{ editorContent }}
+    </div>
+  </div>
+</div>
