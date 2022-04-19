@@ -21,7 +21,12 @@ const routes: Routes = [
   },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'photos', component: PhotosComponent },
+  {
+    path: 'photos',
+    component: PhotosComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
   { path: '**', component: NotfoundComponent },
 ];
 

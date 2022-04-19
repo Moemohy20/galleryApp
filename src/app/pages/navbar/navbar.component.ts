@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
     private _AngularFireAuth: AngularFireAuth,
     private _Router: Router
   ) {}
-
+  isLogin: boolean = true;
   ngOnInit(): void {}
   onLogOut() {
     this._AngularFireAuth
