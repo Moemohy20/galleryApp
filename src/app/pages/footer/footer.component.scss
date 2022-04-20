@@ -1,0 +1,35 @@
+.footer {
+  background-color: #4338ca;
+  color: #fff;
+}
+.newsletter input[type="text"] {
+  border: 2px solid #fff;
+  text-indent: 8px;
+}
+.newsletter input[type="text"]:focus {
+  outline: none;
+  border: 2px solid black;
+}
+.newsletter ::placeholder {
+  text-align: center;
+}
+.newsletter button {
+  font-size: 1.3rem;
+  text-transform: capitalize;
+  padding: 17px 40px;
+  border: 0;
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: rgb(0, 0, 0) 0px 7px 0px 0px;
+  color: hsl(0, 0%, 100%);
+}
+.newsletter button:hover {
+  box-shadow: rgb(0, 0, 0) 0px 5px 0px 0px;
+}
+.newsletter button:active {
+  //   background-color: rgb(255, 56, 86);
+  box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
+}

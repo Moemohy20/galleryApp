@@ -14,19 +14,27 @@ export class PhotosComponent implements OnInit {
   ) {}
 
   galeryPhotos: any[] = [];
+
+  ngOnInit(): void {
+    this.showGallery();
+  }
+
   openDialog() {
     this.dialog.open(AddPhotoDialogComponent, {
       width: '500px',
       height: '460px',
     });
   }
-  ngOnInit(): void {
-    this.showGallery();
+
+  deletePhoto(id: string) {
+    return this._AngularFirestore.doc('gallery/' + id).delete();
   }
-  showGallery() {
-    return this._AngularFirestore
-      .collection('gallery')
-      .valueChanges()
-      .subscribe((val) => (this.galeryPhotos = val));
+
+  async showGallery() {
+    const snapshot = this._AngularFirestore.collection('gallery');
+    let data = snapshot.valueChanges({ idField: 'id' });
+    return data.subscribe((val) => {
+      this.galeryPhotos = val;
+    });
   }
 }

@@ -1,14 +1,88 @@
-<form class="form" [formGroup]="registerForm">
-  <mat-form-field class="form-control">
-    <mat-label>Your Email</mat-label>
-    <input type="text" matInput formControlName="email" />
-  </mat-form-field>
-  <mat-form-field class="form-control">
-    <mat-label>Your Password</mat-label>
-    <input type="password" matInput formControlName="password" />
-  </mat-form-field>
-  <div class="flex justify-between items-center">
-    <button (click)="createUser()" mat-button>create a user</button>
-    <a routerLink="/login">login </a>
+<div class="flex h-auto items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <img
+        class="mx-auto w-auto mb-7"
+        src="assets/undraw_welcome_cats_thqn.svg"
+        alt="Workflow"
+      />
+      <h2 class="mt-7 text-center text-3xl font-extrabold text-gray-900">
+        In GalleryZone
+      </h2>
+    </div>
+    <form class="form" [formGroup]="registerForm">
+      <mat-form-field
+        class="form-control rounded-none relative block w-full placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+        appearance="outline"
+      >
+        <mat-label>Your Email</mat-label>
+        <input type="text" matInput formControlName="email" />
+        <div
+          *ngIf="
+            registerForm.get('email')?.errors &&
+            registerForm.get('email')?.touched
+          "
+          class="text-sm font-bold text-red-900"
+        >
+          <p *ngIf="registerForm.get('email')?.errors?.['required']">
+            *email is required
+          </p>
+          <p *ngIf="registerForm.get('email')?.errors?.['email']">
+            *email is invalid
+          </p>
+        </div>
+      </mat-form-field>
+      <mat-form-field
+        class="form-control rounded-none relative block w-full placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+        appearance="outline"
+      >
+        <mat-label>Your Password</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+          autocomplete="on"
+        />
+        <div
+          *ngIf="
+            registerForm.get('password')?.errors &&
+            registerForm.get('password')?.touched
+          "
+          class="text-sm font-bold text-red-900"
+        >
+          <p *ngIf="registerForm.get('password')?.errors?.['required']">
+            *password is required
+          </p>
+          <p *ngIf="registerForm.get('password')?.errors?.['pattern']">
+            *password must be from 3 to 10 characters without spaces
+          </p>
+        </div>
+      </mat-form-field>
+      <div class="flex gap-4 justify-between items-center">
+        <button
+          (click)="createUserWithEmailAndPassword()"
+          mat-button
+          class="w-full border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          create a user
+        </button>
+        <button
+          routerLink="/login"
+          mat-button
+          class="w-full border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Log in
+        </button>
+      </div>
+      <div class="mt-3">
+        <button
+          (click)="createUserWithGoogle()"
+          type="button"
+          class="login-with-google-btn w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600"
+        >
+          Sign in with Google
+        </button>
+      </div>
+    </form>
   </div>
-</form>
+</div>

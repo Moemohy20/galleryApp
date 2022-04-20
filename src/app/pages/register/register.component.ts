@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -10,24 +9,23 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  constructor(
-    private fb: FormBuilder,
-    public auth: AngularFireAuth,
-    private _Router: Router
-  ) {
+  constructor(private fb: FormBuilder, private _AuthService: AuthService) {
     this.registerForm = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.min(5)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,10}$/)],
+      ],
     });
   }
 
   ngOnInit(): void {}
 
-  createUser() {
-    const { email, password } = this.registerForm.value;
-    this.auth.createUserWithEmailAndPassword(email, password).then((user) => {
-      console.log(user);
-      this._Router.navigate(['/home']);
-    });
+  createUserWithEmailAndPassword() {
+    return this._AuthService.createUserWithEmailAndPassword(this.registerForm);
+  }
+
+  createUserWithGoogle() {
+    return this._AuthService.createUserWithGoogle();
   }
 }

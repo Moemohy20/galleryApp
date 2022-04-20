@@ -21,7 +21,7 @@ export class HomepageComponent implements OnInit {
   test1: any;
   firestore = getFirestore();
   ngOnInit(): void {
-    // this.getFroalaContent();
+    this.getFroalaContent();
   }
 
   options: Object = {
@@ -39,56 +39,8 @@ export class HomepageComponent implements OnInit {
       .then(() => console.log('addedd data sucess'));
   }
   async getFroalaContent() {
-    // return this._AngularFirestore
-    //   .collection('Froala Content')
-    //   .doc('HTMLContent')
-    //   .valueChanges()
-    //   .subscribe(
-    //     (val) => ((this.savedHtml = val), console.log(this.savedHtml))
-    //   );
-    //   return this._AngularFirestore
-    //     .collection('Froala Content')
-    //     .valueChanges()
-    //     .subscribe((val) => (this.galeryPhotos = val));
-    // const getData = onSnapshot();
-    // const readDoc = collection(firestore, 'Froala Content');
-
-    // sh8ala 3ady
-    const readData = onSnapshot(
-      doc(this.firestore, 'Froala Content', 'HTMLContent'),
-      (doc) => {
-        this.savedHtml = doc.get('content');
-        // this.savedHtml.push(doc.data());
-        console.log('current data: ', doc.get('content'));
-      }
-    );
-
-    // EDNNNNadasdasd
-
-    // await setDoc(doc(citiesRef, 'content'), {
-    //   name: 'Beijing',
-    //   state: null,
-    //   country: 'China',
-    //   capital: true,
-    //   population: 21500000,
-    //   regions: ['jingjinji', 'hebei'],
-    // });
-    // console.log('hello');
+    onSnapshot(doc(this.firestore, 'Froala Content', 'HTMLContent'), (doc) => {
+      return (this.editorContent = doc.get('content'));
+    });
   }
 }
-
-// this._AngularFirestore
-// .collection('gallery')
-// .add({
-//   title: this.addPhotoForm.value.title,
-//   photoUrl,
-//   date: moment().format('MMMM Do YYYY, h:mm:ss a'),
-// })
-// .then(() => resolve('image addd susceful'));
-
-// showGallery() {
-//   return this._AngularFirestore
-//     .collection('gallery')
-//     .valueChanges()
-//     .subscribe((val) => (this.galeryPhotos = val));
-// }

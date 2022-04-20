@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,23 +8,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  userLoginFrm: FormGroup;
-  constructor(
-    private fb: FormBuilder,
-    private _auth: AngularFireAuth,
-    private _router: Router
-  ) {
-    this.userLoginFrm = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+  userLoginForm: FormGroup;
+  user: any;
+  constructor(private fb: FormBuilder, private _AuthService: AuthService) {
+    this.userLoginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,10}$/)],
+      ],
     });
   }
 
   ngOnInit(): void {}
+
+  async loginWithGoogle() {
+    return this._AuthService.createUserWithGoogle();
+  }
+
   onLogin() {
-    const { email, password } = this.userLoginFrm.value;
-    this._auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => this._router.navigate(['home']));
+    return this._AuthService.loginWithEmailAndPasswrod(this.userLoginForm);
   }
 }
