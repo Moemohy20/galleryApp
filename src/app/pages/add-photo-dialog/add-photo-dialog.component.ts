@@ -33,32 +33,30 @@ export class AddPhotoDialogComponent implements OnInit {
   }
 
   async addNewPhotoTofire() {
-    await this.addNewPhoto(this.addPhotoForm.value.title, this.path);
+    this.addNewPhoto(this.addPhotoForm.value.title, this.path);
   }
 
   addNewPhoto(title: string, photo: File) {
-    return new Promise((resolve, reject) => {
-      const filePath = `photos/${photo.name}`;
-      const fileRef = this._AngularFireStorage.ref(filePath);
-      const task = this._AngularFireStorage.upload(
-        `photos/${photo.name}`,
-        photo
-      );
-      task
-        .snapshotChanges()
-        .pipe(
-          finalize(() => {
-            this.downloadURL = fileRef.getDownloadURL();
-            this.downloadURL.subscribe((photoUrl) => {
-              this._AngularFirestore.collection('gallery').add({
-                title: title,
-                photoUrl,
-                date: moment().format('MMMM Do YYYY, h:mm:ss a'),
-              });
+    const filePath = `photos/${photo.name}`;
+    const fileRef = this._AngularFireStorage.ref(filePath);
+    const uploadPhoto = this._AngularFireStorage.upload(
+      `photos/${photo.name}`,
+      photo
+    );
+    uploadPhoto
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe((photoUrl) => {
+            this._AngularFirestore.collection('gallery').add({
+              title: title,
+              photoUrl,
+              date: moment().format('MMMM Do YYYY, h:mm:ss a'),
             });
-          })
-        )
-        .subscribe();
-    });
+          });
+        })
+      )
+      .subscribe();
   }
 }
