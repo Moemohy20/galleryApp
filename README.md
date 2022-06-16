@@ -1,4 +1,5 @@
 # GalleryApp
+# Live View : https://galleryapp-5fe9d.web.app/home
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
 
